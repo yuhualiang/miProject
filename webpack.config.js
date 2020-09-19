@@ -20,6 +20,10 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.(eot|woff2|woff|ttf|svg)$/,
+        use: ['file-loader']
       }
     ]
   },
