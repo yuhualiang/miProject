@@ -84,7 +84,13 @@ class Video implements Icomponent {
     // 视频的音量 0~1
     videoContent.volume = 0.5;
 
+    if (this.settings.autoplay) {
+      timer = setInterval(playing, 1000);
+      videoContent.play();
+    }
+
     this.tempContaniner.addEventListener('mouseenter', function() {
+      // mouseenter 不会让子元素触发，不会有事件冒泡行为
       videoControls.style.bottom = 0;
     });
     this.tempContaniner.addEventListener('mouseleave', function() {
