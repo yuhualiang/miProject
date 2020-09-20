@@ -77,6 +77,7 @@ class Video implements Icomponent {
     let videoControls = this.tempContaniner.querySelector(`.${styles['video-controls']}`);
     let videoPlay = this.tempContaniner.querySelector(`.${styles['video-play']} i`);
     let videoTimes = this.tempContaniner.querySelectorAll(`.${styles['video-time']} span`);
+    let timer;
 
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
@@ -86,10 +87,12 @@ class Video implements Icomponent {
     // 视频播放事件
     videoContent.addEventListener('play', () => {
       videoPlay.className = 'iconfont iconzanting';
+      timer = setInterval(playing, 1000);
     });
     // 视频暂停事件
     videoContent.addEventListener('pause', () => {
       videoPlay.className = 'iconfont icon-bofang';
+      clearInterval(timer);
     });
 
     videoPlay.addEventListener('click', () => {
@@ -100,6 +103,11 @@ class Video implements Icomponent {
         videoContent.pause();
       }
     })
+
+    // 播放中...
+    function playing() {
+      videoTimes[0].innerHTML = formatTime(videoContent.currentTime);
+    }
 
     function formatTime(number : number) : string {
       number = Math.round(number);
