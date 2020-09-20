@@ -15,7 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.iconquanpingzuidahua:before {
+.iconfull:before {
   content: "\e70e";
 }
 
@@ -31,7 +31,7 @@
   content: "\e602";
 }
 
-.iconyinliang:before {
+.iconvolume:before {
   content: "\e626";
 }
 
