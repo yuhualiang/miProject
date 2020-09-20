@@ -1,3 +1,6 @@
+// import './popup.css'; // 全局css操作
+let styles = require('./popup.css')
+
 interface Ipopup {
   width? : string;
   height? : string;
@@ -39,7 +42,7 @@ class Popup implements Icomponent {
   template() {
     this.tempContainer = document.createElement('div');
     this.tempContainer.innerHTML = `
-      <h1>hello</h1>
+      <h1 class="${styles.popup}">hello</h1>
     `;
     document.body.appendChild(this.tempContainer);
   }
