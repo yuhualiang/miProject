@@ -98,7 +98,6 @@ class Video implements Icomponent {
     })
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
-      console.log('canplay');
       videoTimes[1].innerHTML = formatTime(videoContent.duration);
     });
     // 视频播放事件
