@@ -53,6 +53,7 @@
   margin-left: -7px;
   margin-top: -5px;
   z-index: 2;
+  cursor: pointer;
 }
 
 .video-progress-now {
@@ -136,4 +137,5 @@
   margin-left: -7px;
   margin-top: -5px;
   z-index: 2;
+  cursor: pointer;
 }

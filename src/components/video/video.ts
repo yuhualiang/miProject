@@ -56,7 +56,7 @@ class Video implements Icomponent {
           <i class="iconfont iconfull"></i>          
         </div>
         <div class="${styles['video-volume']}">
-        <i class="iconfont iconvolume"></i>
+          <i class="iconfont iconvolume"></i>
           <div class="${styles['video-volprogress']}">
             <div class="${styles['video-volprogress-now']}"></div>
             <div class="${styles['video-volprogress-bar']}"></div>
@@ -80,7 +80,9 @@ class Video implements Icomponent {
     let timer;
     let videoFull= this.tempContaniner.querySelector(`.${styles['video-full']} i`);
     let videoProgress = this.tempContaniner.querySelectorAll(`.${styles['video-progress']} div`);
-
+    let videoVolProgress = this.tempContaniner.querySelectorAll(`.${styles['video-volprogress']} div`);
+    // 视频的音量 0~1
+    videoContent.volume = 0.5;
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
       console.log('canplay');
@@ -111,9 +113,9 @@ class Video implements Icomponent {
       videoContent.requestFullscreen();
     });
     // 拖拽，改变播放进度
-    videoProgress[2].addEventListener('mousedown', function(ev:MouseEvent) {
+    videoProgress[2].addEventListener('mousedown', function(ev : MouseEvent) {
       let downX = ev.pageX; // 按下点的坐标
-      let downL = this.offsetLeft; // 到当前有点位的组件节点的左偏移
+      let downL = this.offsetLeft; // 到当前有定位的组件节点的左偏移
       document.onmousemove = (ev:MouseEvent) => {
         let scale = (ev.pageX - downX + downL + 8) / this.parentNode.offsetWidth;
         scale < 0 && (scale = 0);
@@ -130,6 +132,23 @@ class Video implements Icomponent {
       };
       ev.preventDefault();
     })
+    // 拖拽，改变播放音量
+    videoVolProgress[1].addEventListener('mousedown', function(ev : MouseEvent) {
+      let downX = ev.pageX; // 按下点的坐标
+      let downL = this.offsetLeft; // 到当前有定位的组件节点的左偏移
+      document.onmousemove = (ev : MouseEvent) => {
+        let scale = (ev.pageX - downX + downL + 8) / this.parentNode.offsetWidth;
+        scale < 0 && (scale = 0);
+        scale > 1 && (scale = 1);
+        videoVolProgress[0].style.width = scale * 100 + "%";
+        this.style.left = scale * 100 + '%';
+        videoContent.volume = scale;
+      };
+      document.onmouseup = () => {
+        document.onmousemove = document.onmouseup = null;
+      };
+      ev.preventDefault();
+    });
     // 播放中...
     function playing() {
       let scale = videoContent.currentTime / videoContent.duration;
