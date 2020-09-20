@@ -73,11 +73,12 @@ class Video implements Icomponent {
     }
   }
   handle() {
-    let videoContent = this.tempContaniner.querySelector(`.${styles['video-content']}`);
+    let videoContent : HTMLVideoElement  = this.tempContaniner.querySelector(`.${styles['video-content']}`);
     let videoControls = this.tempContaniner.querySelector(`.${styles['video-controls']}`);
     let videoPlay = this.tempContaniner.querySelector(`.${styles['video-play']} i`);
     let videoTimes = this.tempContaniner.querySelectorAll(`.${styles['video-time']} span`);
     let timer;
+    let videoFull= this.tempContaniner.querySelector(`.${styles['video-full']} i`);
 
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
@@ -94,7 +95,7 @@ class Video implements Icomponent {
       videoPlay.className = 'iconfont icon-bofang';
       clearInterval(timer);
     });
-
+    // 播放与暂停
     videoPlay.addEventListener('click', () => {
       if (videoContent.paused) {
         videoContent.play();
@@ -103,6 +104,11 @@ class Video implements Icomponent {
         videoContent.pause();
       }
     })
+
+    // 全屏播放
+    videoFull.addEventListener('click', () => {
+      videoContent.requestFullscreen();
+    });
 
     // 播放中...
     function playing() {
