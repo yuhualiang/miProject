@@ -1,5 +1,6 @@
 .popup{ position: fixed; z-index: 20; border: 1px solid #ccc;}
 .popup-title{ height: 60px; background-color: #f5f5f5; display: flex; justify-content: space-between; align-items: center;}
 .popup-title h3{ font-size: 18px; margin-left: 20px; }
-.popup-title i{ font-size: 18px; margin-right: 20px; }
+.popup-title i{ font-size: 18px; margin-right: 20px; cursor: pointer; }
 .popup-content{ height: calc(100% - 60px); background-color: red; }
+.mask{ position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 10; background-color: rgba(0, 0, 0, 0.5);}

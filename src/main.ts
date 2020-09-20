@@ -13,10 +13,13 @@ for (let i = 0; i < listItem.length; i++) {
     console.log(url, title);
 
     popup({
-      width : '880px',
-      height : '556px',
+      width : '440px',
+      height : '278px',
       title,
-      pos : 'center'
+      pos : 'center',
+      content(elem) {
+        console.log(elem)
+      }
     })
   })
 }
