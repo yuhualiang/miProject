@@ -110,7 +110,26 @@ class Video implements Icomponent {
     videoFull.addEventListener('click', () => {
       videoContent.requestFullscreen();
     });
+    // 拖拽，改变播放进度
+    videoProgress[2].addEventListener('mousedown', function(ev:MouseEvent) {
+      let downX = ev.pageX; // 按下点的坐标
+      let downL = this.offsetLeft; // 到当前有点位的组件节点的左偏移
+      document.onmousemove = (ev:MouseEvent) => {
+        let scale = (ev.pageX - downX + downL + 8) / this.parentNode.offsetWidth;
+        scale < 0 && (scale = 0);
+        scale > 1 && (scale = 1);
 
+        videoProgress[0].style.width = scale * 100 + '%';
+        videoProgress[1].style.width = scale * 100 + '%';
+        this.style.left = scale * 100 + '%';
+
+        videoContent.currentTime = scale * videoContent.duration;
+      };
+      document.onmouseup = () => {
+        document.onmousemove = document.onmouseup = null;
+      };
+      ev.preventDefault();
+    })
     // 播放中...
     function playing() {
       let scale = videoContent.currentTime / videoContent.duration;
