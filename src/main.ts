@@ -12,6 +12,11 @@ for (let i = 0; i < listItem.length; i++) {
 
     console.log(url, title);
 
-    popup({})
+    popup({
+      width : '880px',
+      height : '556px',
+      title,
+      pos : 'center'
+    })
   })
 }
