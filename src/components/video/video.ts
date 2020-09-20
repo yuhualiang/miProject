@@ -83,6 +83,13 @@ class Video implements Icomponent {
     let videoVolProgress = this.tempContaniner.querySelectorAll(`.${styles['video-volprogress']} div`);
     // 视频的音量 0~1
     videoContent.volume = 0.5;
+
+    this.tempContaniner.addEventListener('mouseenter', function() {
+      videoControls.style.bottom = 0;
+    });
+    this.tempContaniner.addEventListener('mouseleave', function() {
+      videoControls.style.bottom = '-50px';
+    })
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
       console.log('canplay');

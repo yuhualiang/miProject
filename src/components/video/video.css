@@ -12,7 +12,7 @@
 .video-controls {
   position: absolute;
   width: 100%;
-  bottom: 0px;
+  bottom: -50px;
   left: 0;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.8);
