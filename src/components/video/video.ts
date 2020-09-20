@@ -79,6 +79,7 @@ class Video implements Icomponent {
     let videoTimes = this.tempContaniner.querySelectorAll(`.${styles['video-time']} span`);
     let timer;
     let videoFull= this.tempContaniner.querySelector(`.${styles['video-full']} i`);
+    let videoProgress = this.tempContaniner.querySelectorAll(`.${styles['video-progress']} div`);
 
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
@@ -112,7 +113,12 @@ class Video implements Icomponent {
 
     // 播放中...
     function playing() {
+      let scale = videoContent.currentTime / videoContent.duration;
+      let scaleSuc = videoContent.buffered.end(0) / videoContent.duration;
       videoTimes[0].innerHTML = formatTime(videoContent.currentTime);
+      videoProgress[0].style.width = scale * 100 + '%';
+      videoProgress[1].style.width = scaleSuc * 100 + '%';
+      videoProgress[2].style.left = scale * 100 + '%';
     }
 
     function formatTime(number : number) : string {
