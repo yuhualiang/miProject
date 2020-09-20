@@ -76,10 +76,12 @@ class Video implements Icomponent {
     let videoContent = this.tempContaniner.querySelector(`.${styles['video-content']}`);
     let videoControls = this.tempContaniner.querySelector(`.${styles['video-controls']}`);
     let videoPlay = this.tempContaniner.querySelector(`.${styles['video-play']} i`);
+    let videoTimes = this.tempContaniner.querySelectorAll(`.${styles['video-time']} span`);
 
     // 视频是否加载完毕
     videoContent.addEventListener('canplay', () => {
       console.log('canplay');
+      videoTimes[1].innerHTML = formatTime(videoContent.duration);
     });
     // 视频播放事件
     videoContent.addEventListener('play', () => {
@@ -98,6 +100,20 @@ class Video implements Icomponent {
         videoContent.pause();
       }
     })
+
+    function formatTime(number : number) : string {
+      number = Math.round(number);
+      let min = Math.floor(number / 60);
+      let sec = Math.floor(number % 60);
+      return setZero(min) + ':' + setZero(sec);
+    }
+
+    function setZero(number : number) : string {
+      if (number < 10) {
+        return '0' + number;
+      }
+      return '' + number;
+    }
   }
 }
 
